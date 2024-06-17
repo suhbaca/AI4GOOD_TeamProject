@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Display</title>
+    <style>
+        .word-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #E0F1BB;  /* Change the background color here */
+            padding: 20px;  /* Add padding for better visual separation */
+            border-radius: 10px;  /* Optional: add border radius for rounded corners */
+        }
+        .word {
+            padding: 20px 0;
+            font-size: 24px;  /* Change the font size here */
+        }
+        .top-gap, .bottom-gap {
+            height: 50px;
+            background-color: #A9C7AC;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="top-gap"></div>
+        <div class="word-container" id="word-container"></div>
+        <div class="bottom-gap"></div>
+    </div>
+
+    <script>
+        function generateRandomWords(count, length) {
+            const words = [];
+            const characters = 'abcdefghijklmnopqrstuvwxyz';
+
+            for (let i = 0; i < count; i++) {
+                let word = '';
+                for (let j = 0; j < length; j++) {
+                    word += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                words.push(word);
+            }
+
+            return words;
+        }
+
+        function displayWords(words) {
+            const container = document.getElementById('word-container');
+            container.innerHTML = '';  // Clear previous words if any
+            words.forEach(word => {
+                const wordElement = document.createElement('div');
+                wordElement.textContent = word;
+                wordElement.classList.add('word');
+                container.appendChild(wordElement);
+            });
+        }
+
+        function init() {
+            const words = generateRandomWords(5, 5); // Generate 5 random words of length 5
+            displayWords(words);
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
+
